@@ -1,11 +1,30 @@
 # -*- mode: python ; coding: utf-8 -*-
+import os
+import glob
+import customtkinter
+import tkinterdnd2
 
+customtkinter_path = os.path.dirname(customtkinter.__file__)
+tkinterdnd2_path = os.path.dirname(tkinterdnd2.__file__)
+
+bin_dir = 'bin'
+if not os.path.exists(bin_dir):
+    bin_dir = r'C:\Program Files (x86)\Ezthumb'
+
+binaries = []
+if os.path.exists(bin_dir):
+    for dll in glob.glob(os.path.join(bin_dir, "*.dll")):
+        binaries.append((dll, '.'))
+    for exe_name in ["ezthumb.exe", "ffmpeg.exe", "ffprobe.exe"]:
+        exe_path = os.path.join(bin_dir, exe_name)
+        if os.path.exists(exe_path):
+            binaries.append((exe_path, '.'))
 
 a = Analysis(
-    ['F:\\EzthumbWin_CTk.py'],
+    ['EzthumbWin_CTk.py'],
     pathex=[],
-    binaries=[('C:\\Program Files (x86)\\Ezthumb\\*.dll', '.'), ('C:\\Program Files (x86)\\Ezthumb\\ezthumb.exe', '.'), ('C:\\Program Files (x86)\\Ezthumb\\ffmpeg.exe', '.'), ('C:\\Program Files (x86)\\Ezthumb\\ffprobe.exe', '.')],
-    datas=[('C:\\Users\\Legend\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\customtkinter', 'customtkinter/'), ('C:\\Users\\Legend\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\tkinterdnd2', 'tkinterdnd2/')],
+    binaries=binaries,
+    datas=[(customtkinter_path, 'customtkinter/'), (tkinterdnd2_path, 'tkinterdnd2/')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -32,7 +51,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['F:\\favicon.ico'],
+    icon=['favicon.ico'],
 )
 coll = COLLECT(
     exe,
