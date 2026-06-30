@@ -31,7 +31,7 @@ jobs:
       - name: Download and Extract FFmpeg Shared Binaries
         shell: pwsh
         run: |
-          Invoke-WebRequest -Uri "https://github.com/yt-dlp/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-shared.zip" -OutFile "ffmpeg.zip"
+          Invoke-WebRequest -Uri "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip" -OutFile "ffmpeg.zip"
           Expand-Archive -Path "ffmpeg.zip" -DestinationPath "ffmpeg_extracted"
           Copy-Item -Path "ffmpeg_extracted\*\bin\*.dll" -Destination "bin\" -Force
           Copy-Item -Path "ffmpeg_extracted\*\bin\ffmpeg.exe" -Destination "bin\" -Force
