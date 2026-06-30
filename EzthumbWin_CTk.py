@@ -1617,7 +1617,11 @@ class EzthumbCTkApp(ctk.CTk):
             video_path
         ]
         try:
-            result = subprocess.run(cmd, capture_output=True, check=True, creationflags=CREATE_NO_WINDOW)
+            result = subprocess.run(cmd, capture_output=True, check=False, creationflags=CREATE_NO_WINDOW)
+            if result.returncode != 0:
+                stderr_str = result.stderr.decode("utf-8", errors="ignore").strip()
+                messagebox.showerror("ffprobe Error", f"ffprobe failed with exit code {result.returncode}.\n\nError details:\n{stderr_str}")
+                return None
             stdout_str = result.stdout.decode("utf-8", errors="ignore")
             data = json.loads(stdout_str)
             
