@@ -1,36 +1,38 @@
 # Ezthumb Modern (CustomTkinter Edition)
 
-A desktop graphical user interface for the Ezthumb contact sheet generator, rebuilt using CustomTkinter.
-
-## Features
-
-- Modern Dark Mode Interface: A unified dark user interface leveraging CustomTkinter widgets and custom styling.
-- Native Drag and Drop: Integrated drag and drop capability using the tkinterdnd2 library to prevent GIL locks and support administrator execution.
-- Metadata Integration: Advanced media track detection via the pymediainfo library. Displays video resolutions, display aspect ratios (DAR), frame rates, precise audio stream bitrates, and descriptive subtitle track titles.
-- Adjustable Grid Layout: Responsive 2-column thumbnail editing grid that fits within the default 917x617 window size.
-- Smart Frame Randomizer: Generates random frame timestamps while maintaining chronological order to prevent overlap.
-- Profile Management: Save and load configuration settings dynamically.
+A desktop graphical user interface for the Ezthumb contact sheet generator, built with CustomTkinter.
 
 ## Requirements
 
-Install the Python dependencies:
+Ensure the Python dependencies are installed:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Additional requirements:
+In addition, the application requires:
 - MediaInfo must be installed on the system for pymediainfo to access the shared libraries.
+- The Ezthumb engine binaries (`ezthumb.exe`, `ffmpeg.exe`, `ffprobe.exe` and their associated DLLs) should be located in the `bin/` directory of the project, or installed globally at `C:\Program Files (x86)\Ezthumb`.
 
-## Building the Executable
+## Running the Application (Recommended)
 
-To compile a standalone Windows executable, run PyInstaller with the provided specification file:
+To run the application directly from the source code without compilation (avoiding antivirus false positives):
+
+```bash
+python EzthumbWin_CTk.py
+```
+
+## Building the Standalone Executable (Optional)
+
+To compile a standalone Windows executable, execute PyInstaller with the provided specification file:
 
 ```bash
 pyinstaller --noconfirm EzthumbWin_CTk.spec
 ```
 
-Note: Ensure that ezthumb.exe, ffmpeg.exe, and ffprobe.exe are located in "C:\Program Files (x86)\Ezthumb" for correct packaging.
+The compiled output will be generated inside the `dist/EzthumbWin_CTk/` directory.
+
+Important: Since this is built in directory mode (`--onedir`), the executable `EzthumbWin_CTk.exe` requires the `_internal` directory to be present in the same folder. Do not move or copy the `.exe` file by itself.
 
 ## Project Structure
 
@@ -38,4 +40,4 @@ Note: Ensure that ezthumb.exe, ffmpeg.exe, and ffprobe.exe are located in "C:\Pr
 - EzthumbWin_CTk.spec: PyInstaller configuration and build specification.
 - favicon.ico: Application icon.
 - requirements.txt: List of required Python dependencies.
-- .gitignore: Standard configuration to exclude build and cache folders from Git.
+- .gitignore: Configuration to exclude build and cache folders from Git.
