@@ -28,6 +28,15 @@ jobs:
           pip install pyinstaller
           pip install -r requirements.txt
 
+      - name: Download and Extract FFmpeg Shared Binaries
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/yt-dlp/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-shared.zip" -OutFile "ffmpeg.zip"
+          Expand-Archive -Path "ffmpeg.zip" -DestinationPath "ffmpeg_extracted"
+          Copy-Item -Path "ffmpeg_extracted\*\bin\*.dll" -Destination "bin\" -Force
+          Copy-Item -Path "ffmpeg_extracted\*\bin\ffmpeg.exe" -Destination "bin\" -Force
+          Copy-Item -Path "ffmpeg_extracted\*\bin\ffprobe.exe" -Destination "bin\" -Force
+
       - name: Build Executable
         run: |
           pyinstaller --noconfirm EzthumbWin_CTk.spec

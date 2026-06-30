@@ -6,5 +6,9 @@ dist/
 .idea/
 *.lnk
 *.dmp
-bin/
+
+# Ignore heavy FFmpeg files in bin
+bin/*.dll
+bin/ffmpeg.exe
+bin/ffprobe.exe
 
