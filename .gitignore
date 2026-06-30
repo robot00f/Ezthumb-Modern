@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+build/
+dist/
+.vscode/
+.idea/
+*.lnk
+*.dmp
